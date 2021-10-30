@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -8,9 +9,14 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-// app.get('/api', (req, res) => {
-//   res.json({ success: true });
-// });
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 100,
+});
+app.use(limiter);
+app.set('trust proxy', 1);
+
 // Routes
 app.use('/api', require('./routes'));
 
