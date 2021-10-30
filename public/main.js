@@ -3,7 +3,7 @@ const weatherForm = document.querySelector('#weather-form');
 const cityInput = document.querySelector('#city-input');
 
 const fetchWeather = async (city) => {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=50b84f23de40d633160a00d010d1f09a`;
+  const url = `/api?q=${city}`;
 
   const res = await fetch(url);
   const data = await res.json();
